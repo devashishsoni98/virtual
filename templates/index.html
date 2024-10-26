@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Verification</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #video {
+            width: 100%; /* Video takes 80% of the screen width */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+
+        #overlay {
+            position: absolute;
+            top: 10%; /* Positioning overlay */
+            right: 2%; /* Centering */
+            width: 30%; /* Overlay takes 80% width */
+            height: 80%; /* Adjust height as needed */
+            background: rgba(255, 255, 255, 0.5); /* Glass effect */
+            backdrop-filter: blur(10px); /* Glass effect */
+            border-radius: 15px; /* Rounded corners */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: black; /* Text color */
+            font-size: 24px; /* Font size for result text */
+            text-align: center; /* Center text alignment */
+        }
+
+        #result {
+            margin-top: 20px; /* Space above result text */
+        }
+
+        h1 {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333; /* Title color */
+        }
+    </style>
+</head>
+<body>
+    <video id="video" autoplay></video>
+    <div id="overlay">
+        <h1>Identity Verification System</h1>
+        <div id="result">Waiting for recognition...</div>
+    </div>
+
+    <script>
+        const socket = io();
+        const video = document.getElementById('video');
+
+        // Access the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                startCapturing(); // Start capturing frames after video starts
+            })
+            .catch(err => console.error("Error accessing camera:", err));
+
+        let lastCaptureTime = 0;
+        const captureInterval = 2000; // Capture every 2 seconds
+
+        function startCapturing() {
+            setInterval(captureImage, captureInterval); // Capture every 2 seconds
+        }
+
+        function captureImage() {
+            const currentTime = new Date().getTime();
+            if (currentTime - lastCaptureTime < captureInterval) return; // Throttle captures
+
+            lastCaptureTime = currentTime;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0);
+
+            // Convert the image to a data URL and send it via WebSocket
+            const dataURL = canvas.toDataURL('image/png');
+            socket.emit('image', dataURL);
+        }
+
+        socket.on('response', function(data) {
+            const resultDiv = document.getElementById('result');
+            if (data.message) {
+                resultDiv.innerHTML = data.message;
+                resultDiv.style.color = 'red'; // Change color for error messages
+                resultDiv.style.fontWeight = 'bold'; // Make error messages bold
+            } else {
+                resultDiv.innerHTML =
+                    `Name: ${data.name}<br>Age: ${data.age}<br>Role: ${data.role}<br>Department: ${data.department}<br>Email: ${data.email}<br>Phone: ${data.phone}<br>Year: ${data.year}`;
+                resultDiv.style.color = 'green'; // Change color for success messages
+                resultDiv.style.fontWeight = 'normal'; // Reset font weight for success messages
+                resultDiv.style.textAlign = 'left'; // Align text to the left for details
+                resultDiv.style.paddingLeft = '10px'; // Add padding for better readability
+                resultDiv.style.paddingRight = '10px';
+                resultDiv.style.wordWrap = 'break-word'; // Allow long words to break to the next line
+                resultDiv.style.lineHeight = '1.5'; // Increase line height for readability
+           }
+        });
+    </script>
+</body>
+</html
