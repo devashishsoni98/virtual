@@ -1,77 +1,77 @@
-[
-    {
-        "name": "Aman Jain",
-        "age": 20,
-        "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/WhatsApp Image 2024-09-24 at 20.33.57_f6251ba3.jpg",
-        "role": "Student",
-        "department": "Computer Science",
-        "email": "aman.jain@example.com",
-        "phone": "+1234567890",
-        "year": 2
-    },
-    {
-        "name": "Devashish Soni",
-        "age": 12,
-        "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/IMG-20230807-WA0004.jpg",
-        "role": "Student",
-        "department": "Middle School",
-        "email": "devashish.soni@example.com",
-        "phone": "+0987654321",
-        "year": 7
-    },
-    {
-        "name": "Ankit",
-        "age": 40,
-        "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.05_46e07906.jpg",
-        "role": "Professor",
-        "department": "Mathematics",
-        "email": "ankit.prof@example.com",
-        "phone": "+2233445566"
-    },
-    {
-        "name": "Karan",
-        "age": 40,
-        "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.23_20dd3e14.jpg",
-        "role": "Professor",
-        "department": null,
-        "email": null,
-        "phone": null
-    }
-    ,
-  
-    {
-        "name": "Sarthak",
-        "age": 40,
-        "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 11.23.55_b15cc62c.jpg",
-        "role": null,
-        "email": null,
-        "phone": null
-    }
-    ,
-    {
-        "name": "Lavina Sevani",
-        "age": 20,
-        "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 16.29.49_d40c321d.jpg",
-        "role": "Student",
-        "email": "lavina@gmail.com",
-        "phone": "861948173489"
-    }
-    ,
-    {
-        "name": "Gauri",
-        "age": 40,
-        "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.48.04_da9f1aa2.jpg",
-        "role": null,
-        "email": null,
-        "phone": null
-    },
-    {
-        "name": "Harshit",
-        "age": 40,
-        "image_path": "C:/Users/AMAN/Pictures/Screenshots/Screenshot 2024-10-26 123851.png",
-        "role": null,
-        "email": null,
-        "phone": null
-    }
+    [
+        {
+            "name": "Aman Jain",
+            "age": 20,
+            "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/WhatsApp Image 2024-09-24 at 20.33.57_f6251ba3.jpg",
+            "role": "Student",
+            "department": "Computer Science",
+            "email": "aman.jain@example.com",
+            "phone": "+1234567890",
+            "year": 2
+        },
+        {
+            "name": "Devashish Soni",
+            "age": 12,
+            "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/IMG-20230807-WA0004.jpg",
+            "role": "Student",
+            "department": "Middle School",
+            "email": "devashish.soni@example.com",
+            "phone": "+0987654321",
+            "year": 7
+        },
+        {
+            "name": "Ankit",
+            "age": 40,
+            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.05_46e07906.jpg",
+            "role": "Professor",
+            "department": "Mathematics",
+            "email": "ankit.prof@example.com",
+            "phone": "+2233445566"
+        },
+        {
+            "name": "Karan",
+            "age": 40,
+            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.23_20dd3e14.jpg",
+            "role": "Professor",
+            "department": null,
+            "email": null,
+            "phone": null
+        }
+        ,
     
-]
+        {
+            "name": "Sarthak",
+            "age": 40,
+            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 11.23.55_b15cc62c.jpg",
+            "role": null,
+            "email": null,
+            "phone": null
+        }
+        ,
+        {
+            "name": "Lavina Sevani",
+            "age": 20,
+            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 16.29.49_d40c321d.jpg",
+            "role": "Student",
+            "email": "lavina@gmail.com",
+            "phone": "861948173489"
+        }
+        ,
+        {
+            "name": "Gauri",
+            "age": 40,
+            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.48.04_da9f1aa2.jpg",
+            "role": null,
+            "email": null,
+            "phone": null
+        },
+        {
+            "name": "Harshit",
+            "age": 40,
+            "image_path": "C:/Users/AMAN/Pictures/Screenshots/Screenshot 2024-10-26 123851.png",
+            "role": null,
+            "email": null,
+            "phone": null
+        }
+        
+    ]
