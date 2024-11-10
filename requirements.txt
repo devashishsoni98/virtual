@@ -1,4 +1,3 @@
--r constraints.txt
 dlib-bin==19.24.6           # Use pre-built version of dlib that does not require CMake
 streamlit==1.22.0  # Specify your Streamlit version
 Flask==2.3.3       # Include if needed

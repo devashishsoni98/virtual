@@ -1,77 +1,152 @@
-    [
-        {
-            "name": "Aman Jain",
-            "age": 20,
-            "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/WhatsApp Image 2024-09-24 at 20.33.57_f6251ba3.jpg",
-            "role": "Student",
-            "department": "Computer Science",
-            "email": "aman.jain@example.com",
-            "phone": "+1234567890",
-            "year": 2
-        },
-        {
-            "name": "Devashish Soni",
-            "age": 12,
-            "image_path": "C:/Users/AMAN/Pictures/Saved Pictures/IMG-20230807-WA0004.jpg",
-            "role": "Student",
-            "department": "Middle School",
-            "email": "devashish.soni@example.com",
-            "phone": "+0987654321",
-            "year": 7
-        },
-        {
-            "name": "Ankit",
-            "age": 40,
-            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.05_46e07906.jpg",
-            "role": "Professor",
-            "department": "Mathematics",
-            "email": "ankit.prof@example.com",
-            "phone": "+2233445566"
-        },
-        {
-            "name": "Karan",
-            "age": 40,
-            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.10.23_20dd3e14.jpg",
-            "role": "Professor",
-            "department": null,
-            "email": null,
-            "phone": null
-        }
-        ,
-    
-        {
-            "name": "Sarthak",
-            "age": 40,
-            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 11.23.55_b15cc62c.jpg",
-            "role": null,
-            "email": null,
-            "phone": null
-        }
-        ,
-        {
-            "name": "Lavina Sevani",
-            "age": 20,
-            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 16.29.49_d40c321d.jpg",
-            "role": "Student",
-            "email": "lavina@gmail.com",
-            "phone": "861948173489"
-        }
-        ,
-        {
-            "name": "Gauri",
-            "age": 40,
-            "image_path": "C:/Users/AMAN/Downloads/WhatsApp Image 2024-10-24 at 10.48.04_da9f1aa2.jpg",
-            "role": null,
-            "email": null,
-            "phone": null
-        },
-        {
-            "name": "Harshit",
-            "age": 40,
-            "image_path": "C:/Users/AMAN/Pictures/Screenshots/Screenshot 2024-10-26 123851.png",
-            "role": null,
-            "email": null,
-            "phone": null
-        }
-        
-    ]
+[
+    {
+        "Name": "Lavina Sevani",
+        "Age": 19,
+        "Designation": "Student",
+        "Registration No.": "PIET22CS092"
+    },
+    {
+        "Name": "Sharad Kumar Sharma ",
+        "Age": 19,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR051 "
+    },
+    {
+        "Name": "Devashish Soni ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR016"
+    },
+    {
+        "Name": "Himani Sharma ",
+        "Age": 21,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR025 "
+    },
+    {
+        "Name": "Jeki Panchal ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET23CR029"
+    },
+    {
+        "Name": "Aman Jain",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR002"
+    },
+    {
+        "Name": "Jatin Nama",
+        "Age": 21,
+        "Designation": "Student",
+        "Registration No.": "PIET22CS075"
+    },
+    {
+        "Name": "Ankit Sharma",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR006"
+    },
+    {
+        "Name": "Gauri Singhal",
+        "Age": 19,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR022"
+    },
+    {
+        "Name": "DEEPENDRA SHARMA",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR015"
+    },
+    {
+        "Name": "Akshay kumar ",
+        "Age": 21,
+        "Designation": "Student",
+        "Registration No.": null
+    },
+    {
+        "Name": "Devyanshi Nandwana ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR017"
+    },
+    {
+        "Name": "Sarthak sain ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "Piet22cr049 "
+    },
+    {
+        "Name": "Rituraj Singh",
+        "Age": 19,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR047"
+    },
+    {
+        "Name": "Hiya Gurbani ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CS072"
+    },
+    {
+        "Name": "Chandan Suthar ",
+        "Age": 22,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR013"
+    },
+    {
+        "Name": "Karan Sukhwal ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR032"
+    },
+    {
+        "Name": "Ankit garg",
+        "Age": 21,
+        "Designation": "Student",
+        "Registration No.": "Piet22cr005"
+    },
+    {
+        "Name": "Sanjana Varyani ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "Piet22cr048"
+    },
+    {
+        "Name": "Avnik Jain",
+        "Age": 19,
+        "Designation": "Student",
+        "Registration No.": "PIET23CS031"
+    },
+    {
+        "Name": "Tarush Agarwal ",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "Piet22cr054"
+    },
+    {
+        "Name": "Garvit Arora",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR063"
+    },
+    {
+        "Name": "Chanchal Yaduvanshi",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CS043"
+    },
+    {
+        "Name": "Harshita Shrimal",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CS066"
+    },
+    {
+        "Name": "Yash Jain",
+        "Age": 20,
+        "Designation": "Student",
+        "Registration No.": "PIET22CR058"
+    }
+]

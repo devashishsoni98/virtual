@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 
+user.json
+
 # Virtual environment
 venv/
 env/

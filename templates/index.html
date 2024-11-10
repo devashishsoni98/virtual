@@ -6,82 +6,220 @@
     <title>Identity Verification</title>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: #f8fafc;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .mode-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #e2e8f0;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background-color: #0ea5e9;
+            color: white;
+        }
+
+        .content-area {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            overflow: hidden;
         }
 
         #video {
-            width: 100%; /* Video takes 80% of the screen width */
-            border-radius: 15px; /* Rounded corners */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            width: 100%;
+            display: none;
+        }
+
+        #upload-area {
+            display: none;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .upload-box:hover {
+            border-color: #0ea5e9;
+            background-color: #f0f9ff;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: #64748b;
+            margin-bottom: 1rem;
         }
 
         #overlay {
-            position: absolute;
-            top: 10%; /* Positioning overlay */
-            right: 2%; /* Centering */
-            width: 30%; /* Overlay takes 80% width */
-            height: 80%; /* Adjust height as needed */
-            background: rgba(255, 255, 255, 0.5); /* Glass effect */
-            backdrop-filter: blur(10px); /* Glass effect */
-            border-radius: 15px; /* Rounded corners */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: black; /* Text color */
-            font-size: 24px; /* Font size for result text */
-            text-align: center; /* Center text alignment */
-        }
-
-        #result {
-            margin-top: 20px; /* Space above result text */
+            flex: 0 0 300px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
 
         h1 {
-            position: absolute;
-            top: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #333; /* Title color */
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .heading{
+            text-align:center;
+            font-size:3rem;
         }
     </style>
 </head>
 <body>
-    <video id="video" autoplay></video>
-    <div id="overlay">
-        <h1>Identity Verification System</h1>
-        <div id="result">Waiting for recognition...</div>
+    <div class="container">
+
+        <div class="heading">
+            <h1>Vision Guard</h1>
+        </div>
+
+
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="switchMode('camera')">Camera</button>
+            <button class="mode-btn" onclick="switchMode('upload')">Upload</button>
+        </div>
+        
+        <div class="content-area">
+            <div class="main-content">
+                <video id="video" autoplay></video>
+                <div id="upload-area">
+                    <div class="upload-box" onclick="document.getElementById('file-input').click()">
+                        <div class="upload-icon">📁</div>
+                        <p>Click or drag image to upload</p>
+                        <input type="file" id="file-input" accept="image/*">
+                    </div>
+                    <img id="preview-image" class="preview-image" alt="Preview">
+                </div>
+            </div>
+            
+            <div id="overlay">
+                <h1>Identity Verification</h1>
+                <div id="result">Waiting for input...</div>
+            </div>
+        </div>
     </div>
 
     <script>
         const socket = io();
         const video = document.getElementById('video');
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('file-input');
+        const previewImage = document.getElementById('preview-image');
+        let currentMode = 'camera';
+        let videoStream = null;
 
-        // Access the webcam
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                video.srcObject = stream;
-                startCapturing(); // Start capturing frames after video starts
-            })
-            .catch(err => console.error("Error accessing camera:", err));
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchMode('${mode}')"]`).classList.add('active');
+
+            if (mode === 'camera') {
+                video.style.display = 'block';
+                uploadArea.style.display = 'none';
+                previewImage.style.display = 'none';
+                startCamera();
+            } else {
+                video.style.display = 'none';
+                uploadArea.style.display = 'block';
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+            }
+            
+            document.getElementById('result').innerHTML = 'Waiting for input...';
+        }
+
+        async function startCamera() {
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = videoStream;
+                startCapturing();
+            } catch (err) {
+                console.error("Error accessing camera:", err);
+            }
+        }
 
         let lastCaptureTime = 0;
-        const captureInterval = 2000; // Capture every 2 seconds
+        const captureInterval = 2000;
 
         function startCapturing() {
-            setInterval(captureImage, captureInterval); // Capture every 2 seconds
+            setInterval(captureImage, captureInterval);
         }
 
         function captureImage() {
+            if (currentMode !== 'camera') return;
+            
             const currentTime = new Date().getTime();
-            if (currentTime - lastCaptureTime < captureInterval) return; // Throttle captures
+            if (currentTime - lastCaptureTime < captureInterval) return;
 
             lastCaptureTime = currentTime;
 
@@ -91,29 +229,45 @@
             const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0);
 
-            // Convert the image to a data URL and send it via WebSocket
             const dataURL = canvas.toDataURL('image/png');
             socket.emit('image', dataURL);
         }
+
+        fileInput.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    socket.emit('image', e.target.result);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
 
         socket.on('response', function(data) {
             const resultDiv = document.getElementById('result');
             if (data.message) {
                 resultDiv.innerHTML = data.message;
-                resultDiv.style.color = 'red'; // Change color for error messages
-                resultDiv.style.fontWeight = 'bold'; // Make error messages bold
+                resultDiv.style.color = '#ef4444';
             } else {
-                resultDiv.innerHTML =
-                    `Name: ${data.name}<br>Age: ${data.age}<br>Role: ${data.role}<br>Department: ${data.department}<br>Email: ${data.email}<br>Phone: ${data.phone}<br>Year: ${data.year}`;
-                resultDiv.style.color = 'green'; // Change color for success messages
-                resultDiv.style.fontWeight = 'normal'; // Reset font weight for success messages
-                resultDiv.style.textAlign = 'left'; // Align text to the left for details
-                resultDiv.style.paddingLeft = '10px'; // Add padding for better readability
-                resultDiv.style.paddingRight = '10px';
-                resultDiv.style.wordWrap = 'break-word'; // Allow long words to break to the next line
-                resultDiv.style.lineHeight = '1.5'; // Increase line height for readability
-           }
+                resultDiv.innerHTML = `
+                    <div style="color: #10b981; font-weight: 500; margin-bottom: 1rem;">✓ Identity Verified</div>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div><strong>Name:</strong> ${data.name}</div>
+                        <div><strong>Age:</strong> ${data.age}</div>
+                        <div><strong>Designation:</strong> ${data.designation}</div>
+                        <div><strong>Registration No:</strong> ${data.registration_no}</div>
+                        
+                    </div>`;
+            }
         });
+
+        // Start with camera mode
+        switchMode('camera');
     </script>
 </body>
-</html
+</html>
