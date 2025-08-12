@@ -29,7 +29,20 @@ known_years = []
 # Load each user's data and prepare for recognition
 for user in users:
     try:
-        known_image = face_recognition.load_image_file(user['image'])
+        # Look for image file in images directory
+        image_path = f"images/{user['Name'].replace(' ', '_').lower()}.jpg"
+        # Try different extensions if jpg doesn't exist
+        import os
+        if not os.path.exists(image_path):
+            image_path = f"images/{user['Name'].replace(' ', '_').lower()}.jpeg"
+        if not os.path.exists(image_path):
+            image_path = f"images/{user['Name'].replace(' ', '_').lower()}.png"
+        
+        if not os.path.exists(image_path):
+            print(f"Warning: Image not found for {user['Name']} at {image_path}")
+            continue
+            
+        known_image = face_recognition.load_image_file(image_path)
         known_encoding = face_recognition.face_encodings(known_image)[0]
         
         known_encodings.append(known_encoding)
